@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">JetpackComposeProducts</string>
+    <string name="error_no_internet">Internet not available</string>
+    <string name="error_invalid_credentials">Invalid Credentials</string>
+    <string name="error_server">Server Error</string>
+    <string name="error_generic">Something went wrong, try again later</string>
+    <string name="title_login">Login</string>
+    <string name="login_success">Login successfully</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_button_submit">Login</string>
+    <string name="login_error_username_invalid">Username is invalid</string>
+    <string name="login_error_username_empty">Username is empty</string>
+    <string name="login_error_password_invalid">Password should be greater than 6</string>
+    <string name="login_error_password_empty">Password is empty</string>
+    <string name="title_product">Product</string>
+
 </resources>

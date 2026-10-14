@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewModel.compose)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+    implementation(libs.navigation.compose)
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
