@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
     implementation(libs.navigation.compose)
+    implementation(libs.datastore)
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)

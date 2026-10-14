@@ -14,5 +14,7 @@
     <string name="login_error_password_invalid">Password should be greater than 6</string>
     <string name="login_error_password_empty">Password is empty</string>
     <string name="title_product">Product</string>
+    <string name="title_welcome">Welcome, %s</string>
+    <string name="label_user">User</string>
 
 </resources>

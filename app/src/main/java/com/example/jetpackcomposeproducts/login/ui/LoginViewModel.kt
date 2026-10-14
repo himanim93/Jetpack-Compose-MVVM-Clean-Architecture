@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpackcomposeproducts.R
 import com.example.jetpackcomposeproducts.core.common.AppError
+import com.example.jetpackcomposeproducts.core.common.DatastorePreference
 import com.example.jetpackcomposeproducts.core.common.Resource
 import com.example.jetpackcomposeproducts.login.data.remote.model.LoginRequestDTO
 import com.example.jetpackcomposeproducts.login.domain.LoginUseCase
@@ -17,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
+    private val datastorePreference: DatastorePreference
 ) : ViewModel() {
 
     private val _loginUiState = MutableStateFlow<LoginUiState>(LoginUiState.Ideal)
@@ -30,13 +32,20 @@ class LoginViewModel @Inject constructor(
         val isValid = validateLogin(loginRequestDTO.username, loginRequestDTO.password)
         if (isValid) {
             viewModelScope.launch {
-                _loginUiState.value = LoginUiState.Loading
-
                 loginUseCase.invoke(loginRequestDTO).collect {
                     when (it) {
                         is Resource.Loading -> _loginUiState.value = LoginUiState.Loading
                         is Resource.Success -> {
-                            _loginUiState.value = LoginUiState.Success(it.data)
+
+                            it.data.also { data ->
+                                datastorePreference.saveSession(
+                                    data.accessToken,
+                                    data.firstName,
+                                    data.lastName
+                                )
+                                _loginUiState.value = LoginUiState.Success(data)
+                            }
+
                             _loginUiEvent.emit(LoginUiEvent.ShowToast(R.string.login_success))
                             _loginUiEvent.emit(LoginUiEvent.NavigateToProduct)
                         }
